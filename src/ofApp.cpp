@@ -4,8 +4,7 @@
 void ofApp::setup(){
 
     grid_spacing = 50;
-    font.load("franklinGothic.otf", 20);
-    run_once = true;
+    font.load("franklinGothic.otf", 10);
     draw_x = 100;
     draw_y = 100;
     draw_dim = 160;
@@ -19,12 +18,9 @@ void ofApp::setup(){
 }
 
 //--------------------------------------------------------------
-void ofApp::update(){
-
-}
-
-//--------------------------------------------------------------
 void ofApp::draw(){
+    
+    
     
     ofNoFill();
     ofSetColor(255);
@@ -56,10 +52,10 @@ void ofApp::draw(){
     ofDrawRectangle(ofGetWidth()/2 - (draw_dim /2), draw_y * 3, draw_dim, draw_dim);
     
     if(result.size() > 1){
-        
+
         int r_x = ofGetWidth()/2 - (draw_dim/2);
         int r_y = draw_y * 3;
-        
+
         int val = 0;
         for(int f = 0; f < 10; f++){
             for(int g = 0; g < 10; g++){
@@ -69,17 +65,17 @@ void ofApp::draw(){
                 }else{
                     ofSetColor(255);
                 }
-                
+
                 ofDrawRectangle(f * square_size + r_x, g * square_size + r_y, square_size, square_size);
                 val +=1;
             }
-            
+
         }
     }
     
     
-    ofSetColor(255, 0, 0);
-    font.drawString("x: " + ofToString(mouseX) + " y: " + ofToString(mouseY), mouseX, mouseY);
+    ofSetColor(200);
+    font.drawString("Press 'r' to run,\n'c' to clear,\nor 'n' to generate\n from the same drawings", 30, 400);
     
     
 }
@@ -105,36 +101,152 @@ void ofApp::markovRun(){
 
     for(int i = 0; i < 100; i++){
         int rand = ofRandom(5);
-        
+
         result.push_back(all_grids[rand].f[i]);
-        
+
     }
 }
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
-    if(key == 'r' || 'm'){
+    if(key == 'r' ){
         markovRun();
     }
-    if(key == 'c' || 'C'){
+    if(key == 'n' ){
         result.clear();
-        all_grids.clear();
+        markovRun();
     }
-}
-
-//--------------------------------------------------------------
-void ofApp::keyReleased(int key){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
-
+    
+    if(key == 'c' ){
+        
+        for(int i = 0; i < 5; i ++){
+            for(int j = 0; j < 100; j++){
+                all_grids[i].f[j]=0;
+            }
+        }
+        
+        result.clear();
+    }
+  
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-
+    
+    //Number 0
+    if(mouseX > grid_spacing && mouseX < grid_spacing + draw_dim && mouseY > draw_y && mouseY < draw_y + draw_dim){
+        
+        //Rotate through colors when clicked:
+        for(int i = 0; i < all_grids[0].x.size(); i++){
+                if(
+                   x > all_grids[0].x[i] &&
+                   x < all_grids[0].x[i] + square_size &&
+                   y > all_grids[0].y[i] &&
+                   y < all_grids[0].y[i] + square_size){
+            
+                    
+                    //maybe add colors later
+                    //all_grids[0].f +=1;
+                   
+                    all_grids[0].f[i] += 1;
+            
+                    std::cout << "x: " << all_grids[0].x[i] << " y: " << all_grids[0].y[i] << endl;
+                }
+        }
+        
+    
+    }
+    //Number 1
+    if(mouseX > draw_x * 2 + grid_spacing && mouseX < draw_x * 2 + grid_spacing + draw_dim && mouseY > draw_y && mouseY < draw_y + draw_dim){
+        
+        //Rotate through colors when clicked:
+        for(int i = 0; i < all_grids[1].x.size(); i++){
+                if(
+                   x > all_grids[1].x[i] &&
+                   x < all_grids[1].x[i] + square_size &&
+                   y > all_grids[1].y[i] &&
+                   y < all_grids[1].y[i] + square_size){
+            
+                    
+                    //maybe add colors later
+                    //all_grids[0].f +=1;
+                   
+                    all_grids[1].f[i] += 1;
+            
+                    std::cout << "x: " << all_grids[1].x[i] << " y: " << all_grids[1].y[i] << endl;
+                }
+        }
+    
+    }
+    //Number 2
+    if(mouseX > draw_x * 4 + grid_spacing && mouseX < draw_x * 4 + grid_spacing + draw_dim && mouseY > draw_y && mouseY < draw_y + draw_dim){
+        
+        //Rotate through colors when clicked:
+        for(int i = 0; i < all_grids[2].x.size(); i++){
+                if(
+                   x > all_grids[2].x[i] &&
+                   x < all_grids[2].x[i] + square_size &&
+                   y > all_grids[2].y[i] &&
+                   y < all_grids[2].y[i] + square_size){
+            
+                    
+                    //maybe add colors later
+                    //all_grids[0].f +=1;
+                   
+                    all_grids[2].f[i] += 1;
+            
+                    std::cout << "x: " << all_grids[2].x[i] << " y: " << all_grids[2].y[i] << endl;
+                }
+        }
+    
+    }
+    //Number 3
+    if(mouseX > draw_x * 6 + grid_spacing && mouseX < draw_x * 6 + grid_spacing + draw_dim && mouseY > draw_y && mouseY < draw_y + draw_dim){
+       
+        
+        //Rotate through colors when clicked:
+        for(int i = 0; i < all_grids[3].x.size(); i++){
+                if(
+                   x > all_grids[3].x[i] &&
+                   x < all_grids[3].x[i] + square_size &&
+                   y > all_grids[3].y[i] &&
+                   y < all_grids[3].y[i] + square_size){
+            
+                    
+                    //maybe add colors later
+                    //all_grids[0].f +=1;
+                   
+                    all_grids[3].f[i] += 1;
+            
+                    std::cout << "x: " << all_grids[3].x[i] << " y: " << all_grids[3].y[i] << endl;
+                }
+        }
+    
+    }
+    //Number 4
+    if(mouseX > draw_x * 8 + grid_spacing && mouseX < draw_x * 8 + grid_spacing + draw_dim && mouseY > draw_y && mouseY < draw_y + draw_dim){
+        
+        //Rotate through colors when clicked:
+        for(int i = 0; i < all_grids[4].x.size(); i++){
+                if(
+                   x > all_grids[4].x[i] &&
+                   x < all_grids[4].x[i] + square_size &&
+                   y > all_grids[4].y[i] &&
+                   y < all_grids[4].y[i] + square_size){
+            
+                    
+                    //maybe add colors later
+                    //all_grids[0].f +=1;
+                   
+                    all_grids[4].f[i] += 1;
+            
+                    std::cout << "x: " << all_grids[4].x[i] << " y: " << all_grids[4].y[i] << endl;
+                }
+        }
+        
+    }
+   
+    
 }
 
 //--------------------------------------------------------------
@@ -256,32 +368,3 @@ void ofApp::mousePressed(int x, int y, int button){
     
 }
 
-//--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
-}
