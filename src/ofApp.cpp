@@ -48,6 +48,7 @@ void ofApp::draw(){
         }
     }
     
+    ofSetColor(0);
     ofNoFill();
     ofDrawRectangle(ofGetWidth()/2 - (draw_dim /2), draw_y * 3, draw_dim, draw_dim);
     
