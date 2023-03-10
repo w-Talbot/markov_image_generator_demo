@@ -17,6 +17,7 @@ public:
     vector<int>x;
     vector<int>y;
     vector<int>f;
+    vector<ofColor> rgb;
 };
 
 #endif /* grid_hpp */

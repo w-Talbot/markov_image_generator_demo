@@ -20,6 +20,8 @@ class ofApp : public ofBaseApp{
     bool run_once;
     int draw_x, draw_y, draw_dim;
     int square_size;
-    vector <int> result;
+    vector <ofColor> result;
+    ofColor selected_color;
+    int color_select_indicator;
     
 };
